@@ -1,0 +1,19 @@
+name: ci-cd pipeline
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+              
+            - name: docker build
+              run: docker build -t myapp .
+
+            - name: docker run
+              run: docker run -d -p 5000:5000 myapp 
